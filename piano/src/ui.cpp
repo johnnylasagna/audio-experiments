@@ -4,7 +4,7 @@
 // ---- Constructors ----
 // ----------------------
 
-UI::UI() : UI(1200, 900) {}
+UI::UI() : UI(UIconfig::screenWidth, UIconfig::screenHeight) {}
 UI::UI(int screenWidth_, int screenHeight_) : screenWidth(screenWidth_), screenHeight(screenHeight_) {}
 
 // --------------------------
@@ -60,8 +60,8 @@ void UI::drawKeys() {
 		DrawRectangleLines(i * 100, 600, 100, 300, BLACK);
 
 		if (showKeys) {
-			DrawTextCentered(font, mapping[i].label, i * 100 + 50, 850, 30, BLACK);
-			DrawTextCentered(font, mapping[i + 12].label, i * 100 + 50, 650, 30, BLACK);
+			DrawTextCentered(font, (*mapping)[i].label, i * 100 + 50, 850, 30, BLACK);
+			DrawTextCentered(font, (*mapping)[i + 12].label, i * 100 + 50, 650, 30, BLACK);
 		}
 
 		DrawTextCentered(font, keysNames[i], i * 100 + 50, 750, 30, BLACK);
@@ -149,7 +149,7 @@ UI::~UI() {
 
 void UI::handleKeyNotes() {
 	for (int i = 0; i < 24; i++) {
-		const auto &key = mapping[i];
+		const auto &key = (*mapping)[i];
 
 		const int noteInterval = i % 12;
 		const int noteOctave = i / 12;
@@ -195,9 +195,9 @@ void UI::handleKeyToggle() {
 	} else if (IsKeyPressed(KEY_SPACE)) {
 		linearMapping = !linearMapping;
 		if (!linearMapping) {
-			mapping = UIconfig::mappingsNonLinear;
+			mapping = &UIconfig::mappingsNonLinear;
 		} else {
-			mapping = UIconfig::mappingsLinear;
+			mapping = &UIconfig::mappingsLinear;
 		}
 	}
 }

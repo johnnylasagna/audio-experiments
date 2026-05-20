@@ -36,7 +36,7 @@ class UI {
 	static constexpr std::array<const char *, 12> keysNames = {"I",   "bII", "II", "bIII", "III",  "IV",
 	                                                           "#IV", "V",   "#V", "VI",   "bVII", "VII"};
 
-	const UIconfig::KeyMapping *mapping = UIconfig::mappingsLinear;
+	const std::array<UIconfig::KeyMapping, 24> *mapping = &UIconfig::mappingsLinear;
 
 	int startingNote = 48;
 	std::string startNoteText = MusicConfig::NoteNames[startingNote % 12] + std::to_string(startingNote / 12);
