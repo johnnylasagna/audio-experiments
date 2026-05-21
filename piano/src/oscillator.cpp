@@ -62,6 +62,10 @@ float Oscillator::getNextValue() {
 		phase -= OscillatorConfig::tableSize;
 	}
 
+	if (phase < 0) {
+		phase += OscillatorConfig::tableSize;
+	}
+
 	return sample * amplitude;
 }
 
@@ -69,7 +73,7 @@ float Oscillator::getNextValue() {
 // ---- Oscillator attributes ----
 // -------------------------------
 
-void Oscillator::setFrequency(int newFreq) {
+void Oscillator::setFrequency(float newFreq) {
 	frequency = newFreq;
 	phaseIncrement = frequency * (float)OscillatorConfig::tableSize / AudioConfig::deviceSampleRate;
 }

@@ -42,7 +42,7 @@ class Oscillator {
 
 	// Oscillator attributes
 	bool isActive();
-	void setFrequency(int newFreq);
+	void setFrequency(float newFreq);
 	void setType(OscillatorType type);
 };
 
